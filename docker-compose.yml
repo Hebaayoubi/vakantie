@@ -1,0 +1,31 @@
+name: WereldWandel
+
+version: "3.8"
+
+services:
+  web:
+    container_name: apache_php
+    image: php:8.2-apache
+    ports:
+      - "8082:80"
+    volumes:
+      - ./WereldWandel/var/www/html
+    depends_on:
+      - db
+
+  db:
+    image: mysql:lts
+    container_name: mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: WereldWandel
+
+  phpmyadmin:
+   image: phpmyadmin
+   container_image: phpmyadmin
+   restart: always
+   ports:
+   - "8880:80"
+
+
